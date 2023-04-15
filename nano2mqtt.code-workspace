@@ -4,7 +4,7 @@
 			"path": "nano2mqtt"
 		},
 		{
-			"path": "nano_humidity"
+			"path": "nano_moisture"
 		}
 	],
 	"settings": {
