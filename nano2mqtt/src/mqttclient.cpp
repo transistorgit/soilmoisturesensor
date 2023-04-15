@@ -26,6 +26,7 @@ void MqttClient::setupWifi() {
 
   WiFi.mode(WIFI_OFF);
   WiFi.mode(WIFI_STA);
+  WiFi.hostname(name.c_str());
   WiFi.begin(SSID, PASSWORD);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -42,8 +43,8 @@ void MqttClient::setupWifi() {
 }
 
 void MqttClient::initOta(){
-  ArduinoOTA.setHostname("torschalter");
-  ArduinoOTA.setPassword("tor");
+  ArduinoOTA.setHostname(name.c_str());
+  ArduinoOTA.setPassword(OTAPASSWORD);
   ArduinoOTA.onStart([]() {
     Serial.println("Start");
     });
