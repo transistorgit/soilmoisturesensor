@@ -28,7 +28,7 @@ void loop() {
   }
 
   auto id = Serial.parseInt();
-  if(id < 1 || id > 8){
+  if(id < 0 || id > 7){
     while(Serial.available()){
       Serial.read();//purge input buffer
     }
