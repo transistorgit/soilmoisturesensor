@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "mqttclient.h"
 
-
+#define LED_PIN 2 //ESP-01 -> Pin 1 / ESP-01S -> Pin 2
 MqttClient* mqttClient = nullptr;
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
@@ -14,6 +14,7 @@ void setup() {
   mqttClient = new MqttClient("Soil_Moisture", "iot/garten/", mqttCallback);
   Serial.begin(9600);
   Serial.setTimeout(10);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
@@ -50,5 +51,7 @@ void loop() {
     return;
   }
 
+  digitalWrite(LED_PIN, HIGH);
   mqttClient->publish((std::string("SoilMoisture/") + std::to_string(id)).c_str(), std::to_string(value).c_str());
+  digitalWrite(LED_PIN, LOW);
 }
