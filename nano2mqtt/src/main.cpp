@@ -15,6 +15,7 @@ void setup() {
   Serial.begin(9600);
   Serial.setTimeout(10);
   pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH);
 }
 
 void loop() {
@@ -51,7 +52,7 @@ void loop() {
     return;
   }
 
-  digitalWrite(LED_PIN, HIGH);
-  mqttClient->publish((std::string("SoilMoisture/") + std::to_string(id)).c_str(), std::to_string(value).c_str());
   digitalWrite(LED_PIN, LOW);
+  mqttClient->publish((std::string("SoilMoisture/") + std::to_string(id)).c_str(), std::to_string(value).c_str());
+  digitalWrite(LED_PIN, HIGH);
 }
