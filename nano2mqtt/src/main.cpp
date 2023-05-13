@@ -48,6 +48,8 @@ void loop() {
     return;
   }
 
+  auto value = Serial.parseInt();
+
   digitalWrite(LED_PIN, LOW);
   mqttClient->publish((std::string("SoilMoisture/") + std::to_string(id)).c_str(), std::to_string(value).c_str());
   digitalWrite(LED_PIN, HIGH);
