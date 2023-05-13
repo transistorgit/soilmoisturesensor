@@ -11,7 +11,7 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
 }
 
 void setup() {
-  mqttClient = new MqttClient("Soil_Moisture", "iot/garten/", mqttCallback);
+  mqttClient = new MqttClient("Soil_Moisture", "iot/garten/SoilMoisture/", mqttCallback);
   Serial.begin(9600);
   Serial.setTimeout(10);
   pinMode(LED_PIN, OUTPUT);
@@ -51,6 +51,6 @@ void loop() {
   auto value = Serial.parseInt();
 
   digitalWrite(LED_PIN, LOW);
-  mqttClient->publish((std::string("SoilMoisture/") + std::to_string(id)).c_str(), std::to_string(value).c_str());
+  mqttClient->publish((std::to_string(id)).c_str(), std::to_string(value).c_str());
   digitalWrite(LED_PIN, HIGH);
 }
