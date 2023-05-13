@@ -20,35 +20,31 @@ void setup() {
 
 void loop() {
   mqttClient->operate();
-  
-  //read messages like "S1:44:XX"  sensorid separator percent value 
-  if(Serial.available()<5){
-    return;
-  }
 
-  while(Serial.available() && Serial.read() != 'S'){
+  // read messages like "S1:44:XX"  sensorid separator percent value
+  while (true)
+  {
+    if (Serial.available())
+    {
+      if (Serial.read() == 'S')
+      {
+        break;
+      }
+    }
+    else
+    {
+      return;
+    }
   }
 
   auto id = Serial.parseInt();
-  if(id < 0 || id > 7){
-    while(Serial.available()){
-      Serial.read();//purge input buffer
-    }
+  if (id < 0 || id > 7)
+  {
     return;
   }
 
-  if(Serial.read() != ':'){
-    while(Serial.available()){
-      Serial.read();//purge input buffer
-    }
-    return;
-  }
-
-  auto value = Serial.parseInt();
-  if(value < 0 || value > 100){
-    while(Serial.available()){
-      Serial.read();//purge input buffer
-    }
+  if (Serial.read() != ':')
+  {
     return;
   }
 
